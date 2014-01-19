@@ -5,10 +5,24 @@ title: Axl Blog
 <h2>{{ page.title }}</h2>
 <p>文章</p>
 <ul>
-{% for post in site.posts %}
+{% for post in paginator.posts %}
 <li>{{ post.date | date_to_string }} 
 <a href="{{ post.url }}">{{ post.title }}</a>
 <!--a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a-->
 </li>
 {% endfor %}
 </ul>
+<!-- Pagination links -->
+<div>
+  {% if paginator.previous_page %}
+    <a href="/page{{ paginator.previous_page }}">前页</a>
+  {% else %}
+    <span>前页</span>
+  {% endif %}
+  <span>Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="/page{{ paginator.next_page }}">次页</a>
+  {% else %}
+    <span>次页</span>
+  {% endif %}
+</div>
