@@ -1,2 +1,9 @@
-baseurl: /
-paginate: 11
+baseurl: http://roadstarteam.com
+title: 'roadstarteam.com'
+name: 'Axl Zhao'
+email: axl.zhao@gmail.com
+slogan: '钓鱼岛是中国的，我爱编程，更爱中国。'
+permalink: pretty
+markdown: rdiscount
+rdiscount:
+  extensions: [smart]
