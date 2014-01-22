@@ -11,18 +11,18 @@ layout: default
   {{ content }}
 
    {% if page.tags %} 
-   <p> Tagged: {{ page.tags | array_to_sentence_string }}. </p>
+   <p> 标签: {{ page.tags | array_to_sentence_string }}. </p>
     {% endif %}
 
     {% if page.external-url %} 
     	{% assign url = page.external-url | split: '/' %}
-    	<p>Quoted from: <a href="{{ page.external-url }}">{{ url[2] }}</a>. </p>
+    	<p>引用自: <a href="{{ page.external-url }}">{{ url[2] }}</a>. </p>
     {% endif %}
 	
 </div>
 
 <aside class="related">
-    <h3>(Possibly) Related Posts</h3>
+    <h3>相关博文</h3>
     <ul class="posts">
       {% for post in site.related_posts limit:3 %}
         <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
