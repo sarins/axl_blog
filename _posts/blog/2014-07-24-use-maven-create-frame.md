@@ -9,9 +9,9 @@ sticky: false
 
 ### 使用Maven建立分布式工程骨架
 
->下载分布式工程框架 https://github.com/sarins/distributed_service(https://github.com/sarins/distributed_service)
+>[下载分布式工程框架 https://github.com/sarins/distributed_service](https://github.com/sarins/distributed_service)
 
->Maven参考文档(http://maven.apache.org/archetype/maven-archetype-plugin/examples/create-multi-module-project.html)
+>[Maven参考文档](http://maven.apache.org/archetype/maven-archetype-plugin/examples/create-multi-module-project.html)
 
 - - -
 
