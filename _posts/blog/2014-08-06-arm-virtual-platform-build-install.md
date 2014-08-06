@@ -12,13 +12,21 @@ sticky: false
 #### 1. 工具 (Tools)
 
 >[1] Host linux version: Ubuntu 12.04 LTS (Linux 3.2.0-29-generic-pae)
+
 >[2] Target linux kernel: linux-2.6.32.61.tar.xz
+
 >[3] QEMU: QEMU emulator version 1.0.50 (Debian 1.0.50-2012.03-0ubuntu2), Copyright (c) 2003-2008 Fabrice Bellard
+
 >[4] Cross Compiler: arm-none-linux-gnueabi-gcc (Sourcery CodeBench Lite 2013.05-24) 4.7.3 (Site: http://www.mentor.com/embedded-software/codesourcery)
+
 Mac OS 10.9 http://www.carlson-minot.com/available-arm-eabi-g-lite-builds-for-mac-os-x
+
 >[5] U-boot: u-boot-2013.04.tar.bz2
+
 >[6] Busybox: busybox-1.21.0.tar.bz2
+
 >[7] Genext2fs: genext2fs-1.4.1.tar.gz
+
 
 - - -
 
@@ -94,9 +102,13 @@ make versatile_defconfig
 make menuconfig
 ```
 > choose “Kernel Features → Use the ARM EABI to compile the kernel”
+
 > choose “Kernel Features → Allow old ABI binaries to run with this kernel (EXPERIMENTAL)
+
 > choose “File Systems → Second extended fs support”
+
 > choose “General setup → Initial RAM filesystem and RAM disk (initramfs/initrd) supporte ”
+
 > choose “Device Drivers → Block Devices → Default RAM disk size (kbytes)  = 4096”
 
 ```bash
