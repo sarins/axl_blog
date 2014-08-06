@@ -6,6 +6,12 @@ author: Axl Zhao
 tags: [style, list]
 ---
 
+```java
+public static final void main(String[] args) {
+    System.out.println("Hello.");
+}
+```
+
 简介内容:
 
 ### 元月(January)
