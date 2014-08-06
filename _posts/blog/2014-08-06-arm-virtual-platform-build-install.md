@@ -122,14 +122,14 @@ make -s (if use u-boot, make uImage -s)
 
 ##### 3.2. 创建初始化内存磁盘 (Create RAM disk)
 
-==#设置环境变量 (Setup enviroument var)==
+###### 设置环境变量 (Setup enviroument var)
 
 ```bash
 export ARCH=arm
 export CORSS_COMPILE=” arm-none-linux-gnueabi-”
 ```
 
-==#创建根文件系统 (Create root file system)==
+###### 创建根文件系统 (Create root file system)
 
 ```bash
 #GOTO workspace_folder (any where)
@@ -142,7 +142,7 @@ mknod -m 666 dev/null c 1 3
 ln -s dev/null dev/tty2
 ```
 
-==#编译内核以及模块并安装到根文件系统中 (Compile kernel/moudles and install it to root file system)==
+###### 编译内核以及模块并安装到根文件系统中 (Compile kernel/moudles and install it to root file system)
 
 ```bash
 #GOTO kernel folder
@@ -150,7 +150,7 @@ make modules
 make modules_install INSTALL_MOD_PATH=workspace_folder/rootfs
 ```
 
-==#编译并安装Busybox (Compile & install busybox)==
+###### 编译并安装Busybox (Compile & install busybox)
 
 ```bash
 #GOTO BusyBox source folder (example: /usr/busybox-1.21.0)
@@ -172,13 +172,13 @@ make
 make install
 ```
 
-==#从Busybox复制最小设备文件 (Copy minimal etc files from busybox)==
+###### 从Busybox复制最小设备文件 (Copy minimal etc files from busybox)
 
 ```bash
 cp –a busibox_source/examples/bootfloppy/etc/* workspace_folder/rootfs/etc
 ```
 
-==#使用genext2fs将根文件系统打包为ext2格式 (use genext2fs package rootfs to ext2 file)==
+###### 使用genext2fs将根文件系统打包为ext2格式 (use genext2fs package rootfs to ext2 file)
 
 ```bash
 #GOTO workspace_folder
