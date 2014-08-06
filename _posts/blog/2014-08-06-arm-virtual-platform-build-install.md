@@ -3,6 +3,8 @@ layout: post
 category: blog
 categories: blog
 title: 虚拟ARM开发平台编译与安装
+author: Axl Zhao
+tags: [arm, linux, kernel, SOC, QEMU, cross compile]
 published: true
 sticky: false
 ---
