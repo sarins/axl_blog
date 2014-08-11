@@ -47,8 +47,6 @@ sticky: false
 
 #### 2. 远程方法调用(RMI)与I/O的关系
 
-
-
 ##### 2.1. 远程方法调用(RMI)通用模型
 
 ![](/images/dubbo_study/1.jpg)
@@ -59,8 +57,6 @@ sticky: false
 - - -
 
 ##### 2.2. 网络I/O与本地I/O的区别
-
-
 
 - - -
 
@@ -77,6 +73,9 @@ sticky: false
 ###### 声明与定义（Declare）
 
 本地一般性的Spring服务声明如下：
+
+> **Std loacal:**
+
 ```xml
 <bean id=“xxxService” class=“com.xxx.XxxServiceImpl” />
 
