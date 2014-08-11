@@ -119,6 +119,7 @@ Dubbo服务在Spring环境中的声明：
 > **启动进程**
 
 将以下启动参数加入被启动的java命令中:
+
 ```bash
 -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n
 ```
