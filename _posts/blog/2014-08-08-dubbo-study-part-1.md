@@ -122,17 +122,335 @@ Dubbo服务在Spring环境中的声明：
 
 - - -
 
-++本章描述基于以下条件，Apache maven环境已经安装，并能够正常使用。++
+本章描述基于以下条件:
+* Apache maven环境已经安装，并能够正常使用。
+* Eclipse中的Apache maven插件于shell中的Apache maven使用同一份可执行程序、相同的仓库配置。
+
+
 
 ##### [安装工程骨架]
 
+###### 从github.com/sarins下载示例工程，[工程连接](https://github.com/sarins/distributed_service)。
 
+```bash
+# goto you work folder.
+git clone https://github.com/sarins/distributed_service.git distributed_service
+```
+
+###### 根据以下命令，将工程骨架安装至Apache maven的本地仓库中，已备后续步骤使用。（基于默认的Apache maven设置）
+
+```bash
+cd distributed_service
+
+mvn archetype:create-from-project -Darchetype.filteredExtensions=java
+
+[INFO] Scanning for projects...
+[WARNING]
+[WARNING] Some problems were encountered while building the effective model for com.huatek.unicorn:vimgr-biz:jar:1.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ com.huatek.unicorn:vimgr:1.0, /source/git_repo/java_fm/distributed_service/pom.xml, line 308, column 12
+[WARNING]
+[WARNING] Some problems were encountered while building the effective model for com.huatek.unicorn:vimgr-service-client:jar:1.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ com.huatek.unicorn:vimgr:1.0, /source/git_repo/java_fm/distributed_service/pom.xml, line 308, column 12
+[WARNING]
+[WARNING] Some problems were encountered while building the effective model for com.huatek.unicorn:vimgr-service-impl:jar:1.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ com.huatek.unicorn:vimgr:1.0, /source/git_repo/java_fm/distributed_service/pom.xml, line 308, column 12
+[WARNING]
+[WARNING] Some problems were encountered while building the effective model for com.huatek.unicorn:vimgr:pom:1.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ line 308, column 12
+[WARNING]
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING]
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING]
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] vimgr
+[INFO] vimgr-biz
+[INFO] vimgr-service-client
+[INFO] vimgr-service-impl
+Downloading: http://192.168.129.188:19999/nexus/content/groups/public/org/apache/maven/plugins/maven-javadoc-plugin/maven-metadata.xml
+[WARNING] Could not transfer metadata org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+Downloading: http://192.168.129.188:19999/nexus/content/groups/public/org/apache/maven/plugins/maven-metadata.xml
+Downloading: http://192.168.129.188:19999/nexus/content/groups/public/org/codehaus/mojo/maven-metadata.xml
+[WARNING] Could not transfer metadata org.apache.maven.plugins/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[WARNING] Could not transfer metadata org.codehaus.mojo/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+Downloading: http://192.168.129.188:19999/nexus/content/groups/public/org/apache/maven/plugins/maven-archetype-plugin/maven-metadata.xml
+[WARNING] Could not transfer metadata org.apache.maven.plugins:maven-archetype-plugin/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building vimgr 1.0
+[INFO] ------------------------------------------------------------------------
+[WARNING] Failure to transfer org.apache.maven.plugins/maven-metadata.xml from http://192.168.129.188:19999/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced. Original error: Could not transfer metadata org.apache.maven.plugins/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[WARNING] Failure to transfer org.codehaus.mojo/maven-metadata.xml from http://192.168.129.188:19999/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced. Original error: Could not transfer metadata org.codehaus.mojo/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[WARNING] Failure to transfer org.apache.maven.plugins:maven-archetype-plugin/maven-metadata.xml from http://192.168.129.188:19999/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced. Original error: Could not transfer metadata org.apache.maven.plugins:maven-archetype-plugin/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[WARNING] Failure to transfer org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from http://192.168.129.188:19999/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced. Original error: Could not transfer metadata org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[WARNING] Failure to transfer org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from http://192.168.129.188:19999/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced. Original error: Could not transfer metadata org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[WARNING] Failure to transfer org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from http://192.168.129.188:19999/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus has elapsed or updates are forced. Original error: Could not transfer metadata org.apache.maven.plugins:maven-javadoc-plugin/maven-metadata.xml from/to nexus (http://192.168.129.188:19999/nexus/content/groups/public): Not authorized , ReasonPhrase:Unauthorized.
+[INFO] 
+[INFO] >>> maven-archetype-plugin:2.2:create-from-project (default-cli) @ vimgr >>>
+[INFO] 
+[INFO] <<< maven-archetype-plugin:2.2:create-from-project (default-cli) @ vimgr <<<
+[INFO] 
+[INFO] --- maven-archetype-plugin:2.2:create-from-project (default-cli) @ vimgr ---
+[INFO] Setting default groupId: com.huatek.unicorn
+[INFO] Setting default artifactId: vimgr
+[INFO] Setting default version: 1.0
+[INFO] Setting default package: com.huatek.unicorn
+Scanned 3 filtered files in 3 files: filters/filter-dev.properties, filters/filter-production.properties, filters/filter-test.properties
+Scanned 0 filtered files in 1 files: 
+Scanned 9 filtered files in 9 files: src/main/java/com/huatek/unicorn/continer/ReloadableMain.java, src/main/java/com/huatek/unicorn/brandauth/dao/ApplyDAO.java, src/main/java/com/huatek/unicorn/brandauth/service/ApplyService.java, src/main/java/com/huatek/unicorn/brandauth/service/impl/ApplyServiceImpl.java, src/main/java/com/huatek/unicorn/brandauth/model/ApplyBaseInfo.java, src/main/java/com/huatek/unicorn/brandauth/domain/Apply.java, src/main/java/com/huatek/unicorn/util/Json.java, src/main/java/com/huatek/unicorn/util/IpUtil.java, src/main/java/com/huatek/unicorn/util/IdentityTool.java
+Scanned 7 filtered files in 7 files: src/main/resources/spring/spring-common.xml, src/main/resources/spring/spring-datasource.xml, src/main/resources/spring/spring-transaction.xml, src/main/resources/spring/spring-log.xml, src/main/resources/spring/spring-external.xml, src/main/resources/log4j.xml, src/main/resources/env.properties
+Scanned 1 filtered files in 1 files: src/main/java/com/huatek/unicorn/brandauth/service/ApplyServiceClient.java
+Scanned 1 filtered files in 1 files: src/main/java/com/huatek/unicorn/brandauth/service/ApplyServiceClientImpl.java
+Scanned 4 filtered files in 11 files: src/main/resources/spring_service/spring-dubbo.xml, src/main/resources/spring_service/brandauth/spring-brandauth-provider.xml, src/main/conf/dubbo.properties, src/main/assemble/service-impl-jar-with-dependency.xml
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building vimgr-archetype 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vimgr-archetype ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 38 resources
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vimgr-archetype ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-archetype-plugin:2.2:jar (default-jar) @ vimgr-archetype ---
+[INFO] Building archetype jar: /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/vimgr-archetype-1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.314s
+[INFO] Finished at: Tue Aug 12 17:16:18 CST 2014
+[INFO] Final Memory: 11M/104M
+[INFO] ------------------------------------------------------------------------
+[INFO] Archetype created in /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] vimgr ............................................. SUCCESS [3.804s]
+[INFO] vimgr-biz ......................................... SKIPPED
+[INFO] vimgr-service-client .............................. SKIPPED
+[INFO] vimgr-service-impl ................................ SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.971s
+[INFO] Finished at: Tue Aug 12 17:16:18 CST 2014
+[INFO] Final Memory: 19M/173M
+[INFO] ------------------------------------------------------------------------
+
+cd target/generated-sources/archetype/
+
+mvn install
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building vimgr-archetype 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vimgr-archetype ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 38 resources
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vimgr-archetype ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 2 resources
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:jar (default-jar) @ vimgr-archetype ---
+[INFO] Building archetype jar: /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/vimgr-archetype-1.0
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:integration-test (default-integration-test) @ vimgr-archetype ---
+[INFO] Processing Archetype IT project: basic
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: vimgr-archetype:1.0
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: archetype.it
+[INFO] Parameter: artifactId, Value: basic
+[INFO] Parameter: version, Value: 0.1-SNAPSHOT
+[INFO] Parameter: package, Value: it.pkg
+[INFO] Parameter: packageInPathFormat, Value: it/pkg
+[INFO] Parameter: version, Value: 0.1-SNAPSHOT
+[INFO] Parameter: package, Value: it.pkg
+[INFO] Parameter: groupId, Value: archetype.it
+[INFO] Parameter: artifactId, Value: basic
+[INFO] Parent element not overwritten in /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/basic-biz/pom.xml
+[INFO] Parent element not overwritten in /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/basic-service-client/pom.xml
+[INFO] Parent element not overwritten in /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/basic-service-impl/pom.xml
+[INFO] project created from Archetype in dir: /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic
+[INFO] No post-archetype-generation goals to invoke.
+[INFO]
+[INFO] --- maven-install-plugin:2.5.1:install (default-install) @ vimgr-archetype ---
+[INFO] Installing /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/target/vimgr-archetype-1.0.jar to /opt/devtools/MavenRepositories/Maven/com/huatek/unicorn/vimgr-archetype/1.0/vimgr-archetype-1.0.jar
+[INFO] Installing /source/git_repo/java_fm/distributed_service/target/generated-sources/archetype/pom.xml to /opt/devtools/MavenRepositories/Maven/com/huatek/unicorn/vimgr-archetype/1.0/vimgr-archetype-1.0.pom
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:update-local-catalog (default-update-local-catalog) @ vimgr-archetype ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.614s
+[INFO] Finished at: Tue Aug 12 17:18:21 CST 2014
+[INFO] Final Memory: 11M/107M
+[INFO] ------------------------------------------------------------------------
+```
+
+###### 非默认的Apache maven设置时，需要特别处理。
+
+```bash
+# 假设Apache maven的默认仓库位置被更改至”/opt/xx/MavenRepo/Maven“时。
+
+# 生成archetype的目录文件，使用命令后会在仓库目录生成名为“archetype-catalog.xml”的目录文件。
+
+mvn archetype:crawl
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building vimgr-archetype 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:crawl (default-cli) @ vimgr-archetype ---
+repository /opt/devtools/MavenRepositories/Maven
+catalogFile null
+[INFO] Scanning /opt/devtools/MavenRepositories/Maven/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.jar
+...
+[INFO] Scanning /opt/devtools/MavenRepositories/Maven/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.084s
+[INFO] Finished at: Tue Aug 12 16:55:38 CST 2014
+[INFO] Final Memory: 7M/104M
+[INFO] ----------------------------------------------------------------------
+```
+
+- - -
 
 ##### [根据工程骨架建立项目]
 
+###### 根据以下命令，使用上步建立的工程骨架建立项目（基于默认的Apache maven设置）。
+
+```bash
+# goto new_project_base_folder
+
+mvn archetype:generate -DarchetypeCatalog=local
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] >>> maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom >>>
+[INFO]
+[INFO] <<< maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom <<<
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
+Choose archetype:
+1: file:///opt/devtools/MavenRepositories/Maven/archetype-catalog.xml -> com.huatek.unicorn:vimgr-archetype (vimgr)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 1
+# 选择对应archetype，这里我们选1。
+# 以下4行均为交互式的输入： “com.rst”，“testproject”，“1.0”，“null”
+
+Define value for property 'groupId': : com.rst
+Define value for property 'artifactId': : testproject
+Define value for property 'version':  1.0-SNAPSHOT: : 1.0
+Define value for property 'package':  com.rst: :
+Confirm properties configuration:
+groupId: com.rst
+artifactId: testproject
+version: 1.0
+package: com.rst
+ Y: : Y
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: vimgr-archetype:1.0
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: com.rst
+[INFO] Parameter: artifactId, Value: testproject
+[INFO] Parameter: version, Value: 1.0
+[INFO] Parameter: package, Value: com.rst
+[INFO] Parameter: packageInPathFormat, Value: com/rst
+[INFO] Parameter: package, Value: com.rst
+[INFO] Parameter: version, Value: 1.0
+[INFO] Parameter: groupId, Value: com.rst
+[INFO] Parameter: artifactId, Value: testproject
+[INFO] Parent element not overwritten in /source/git_repo/java_fm/demo_service/testproject/testproject-biz/pom.xml
+[INFO] Parent element not overwritten in /source/git_repo/java_fm/demo_service/testproject/testproject-service-client/pom.xml
+[INFO] Parent element not overwritten in /source/git_repo/java_fm/demo_service/testproject/testproject-service-impl/pom.xml
+[INFO] project created from Archetype in dir: /source/git_repo/java_fm/demo_service/testproject
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 37.884s
+[INFO] Finished at: Tue Aug 12 17:22:13 CST 2014
+[INFO] Final Memory: 12M/104M
+[INFO] ------------------------------------------------------------------------
+
+# 查看以下建立好的工程
+ls
+
+testproject
+
+ls testproject/
+
+filters  testproject-biz             testproject-service-impl
+pom.xml  testproject-service-client
+```
+
+###### 非默认的Apache maven设置时，需要特别处理。
+
+```bash
+# 假设Apache maven的默认仓库位置被更改至”/opt/xx/MavenRepo/Maven“时。
+# 生成archetype的目录文件，使用命令后会在仓库目录生成名为“archetype-catalog.xml”的目录文件。
+# 以下命令明确的指定archetype的仓库文件路径
+
+mvn archetype:generate -DarchetypeCatalog='file:///opt/xx/MavenRepo/Maven/archetype-catalog.xml'
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] >>> maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom >>>
+[INFO]
+[INFO] <<< maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom <<<
+[INFO]
+[INFO] --- maven-archetype-plugin:2.2:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
+Choose archetype:
+1: file:///opt/xx/MavenRepo/Maven/archetype-catalog.xml -> com.huatek.unicorn:vimgr-archetype (vimgr)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains):
+
+# choose it...
+```
+
+
+###### 打开Eclipse，导入新建立的Apache maven工程。
+
+![](/images/dubbo_study/e_imp_maven_project.png)
+
+- - -
+
+##### [工程骨架简介]
+
+
+- - -
+
 ##### [业务逻辑编写]
 
+
+
 ##### [服务配置]
+
+
 
 ##### [打包&发布，运行]
 
