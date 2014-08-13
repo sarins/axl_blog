@@ -432,10 +432,29 @@ Choose a number or apply filter (format: [groupId:]artifactId, case sensitive co
 # choose it...
 ```
 
-
 ###### 打开Eclipse，导入新建立的Apache maven工程。
 
+选择导入工程类型为“Existing Maven Projects”
 ![](/images/dubbo_study/e_imp_maven_project.png)
+
+选择导入工程的根文件夹，Eclipse会自动扫描出工程结构，如图所示
+![](/images/dubbo_study/e_imp_maven_project_2.png)
+
+选取Maven插件与Eclipse的映射关联
+![](/images/dubbo_study/e_imp_maven_project_3.png)
+
+工程导入成功后应如下图所示
+![](/images/dubbo_study/e_imp_maven_project_finished.png)
+
+###### [注意]可能需要手工导入ojdbc文件到本地maven库中。
+
+```bash
+# 命令中的导入的ojdbc7.jar需要从oracle网站手工下载。
+# -Dversion=12.1.0.1 声明该jar文件的版本号。
+
+mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.1 -Dpackaging=jar -Dfile=ojdbc7.jar -DgeneratePom=true
+
+```
 
 - - -
 
