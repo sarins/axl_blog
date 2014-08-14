@@ -546,10 +546,72 @@ p-name-service-impl
 ##### [业务逻辑编写]
 
 
+- - -
+
 
 ##### [服务配置]
 
+###### Spring配置原则，Spring配置文件结构如下：
 
+![](/images/dubbo_study/e_P_biz_struct.png)
+
+```
+spring-common.xml 通用、公共组件配置。
+spring-datasource.xml 数据源配置。
+spring-external.xml 外部组件引用配置。
+spring-log.xml 日志配置。
+spring-transaction.xml 事务相关配置。
+
+# 以上配置均使用一般的spring配置方式，这里不再做进一步的说明。
+```
+
+###### 过滤器适配型配置
+
+```
+# 在filters目录中的配置文件*.properties，根据文件名称适配不同的运行环境，打包程序时会根据传入的运行环境参数对配置文件中的宏执行宏替换，从而达到动态改变配置的目的。
+
+# 以下是dubbo于datasource的动态适配配置示例：
+
+#dubbo
+dubbo.registry.svr_xxx=192.168.129.188:2181
+dubbo.registry.svr_yyy=192.168.129.189:2181,192.168.129.199:2181
+dubbo.port=-1
+
+#jdbc configuration
+jdbc.driver=oracle.jdbc.driver.OracleDriver
+jdbc.url=jdbc:oracle:thin:@192.168.128.89:1521/cqpetro
+jdbc.username=xbb
+jdbc.password=xbb876
+
+```
+
+###### dubbo服务配置
+
+```xml
+# 服务接口暴露配置在spring配置文件中完成。
+
+# 通过先将需暴露的dubbo配置成一个spring服务，然后通过dubbo的spring扩展配置标签，将本地服务映射到dubbo服务上。以下是一个简单的示例：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+	<!-- 使用dubbo协议暴露服务 -->
+	<bean id="applyServiceClient"
+		class="com.rst.xbb.brandauth.service.ApplyServiceClientImpl">
+	</bean>
+	<dubbo:service interface="com.rst.xbb.brandauth.service.ApplyServiceClient"
+		owner="${app.admin}" ref="applyServiceClient" version="1.0" protocol="dubbo"
+		delay="-1" registry="dubboRegistryXxx" />
+</beans>
+
+```
+
+- - -
 
 ##### [打包&发布，运行]
 
