@@ -567,7 +567,7 @@ spring-transaction.xml 事务相关配置。
 
 ###### 过滤器适配型配置
 
-```
+```xml
 # 在filters目录中的配置文件*.properties，根据文件名称适配不同的运行环境，打包程序时会根据传入的运行环境参数对配置文件中的宏执行宏替换，从而达到动态改变配置的目的。
 
 # 以下是dubbo于datasource的动态适配配置示例：
@@ -582,6 +582,15 @@ jdbc.driver=oracle.jdbc.driver.OracleDriver
 jdbc.url=jdbc:oracle:thin:@192.168.128.89:1521/cqpetro
 jdbc.username=xbb
 jdbc.password=xbb876
+
+# 以下是宏引用的配置示例：
+
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<property name="driverClassName" value="${jdbc.driver}" />
+<property name="url" value="${jdbc.url}" />
+<property name="username" value="${jdbc.username}" />
+<property name="password" value="${jdbc.password}" />
+</bean>
 
 ```
 
