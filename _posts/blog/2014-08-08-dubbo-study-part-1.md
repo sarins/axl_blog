@@ -541,7 +541,6 @@ p-name-service-impl
 
 ```
 
-
 - - -
 
 ##### [业务逻辑编写]
@@ -554,6 +553,34 @@ p-name-service-impl
 
 ##### [打包&发布，运行]
 
+```bash
+# 本工程的打包使用Apache maven。
+
+mvn package -Pdev -Dmaven.test.skip=true
+
+# 打包后生成 p-name-service-impl/target/p-name-service-impl-$version-package.tar
+
+# 解压打包后的文件
+tar -xf p-name-service-impl-$version-package.tar
+
+# 解压后得到与文件同名的目录 p-name-service-impl-$version
+
+p-name-service-impl-$version
+|-- bin
+|-- lib
+|-- conf
+
+# 进入p-name-service-impl-$version/bin，运行对应平台的脚本启动服务进程。
+
+cd p-name-service-impl-$version/bin
+
+# *nix bash 平台
+./start.sh
+
+# Windows 平台
+start.bat
+
+```
 
 - - -
 
