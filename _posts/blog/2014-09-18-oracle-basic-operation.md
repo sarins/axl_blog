@@ -53,6 +53,8 @@ SQL> shutdown immediate
 # 建立表空间（正式/临时）
 SQL> create tablespace testins datafile '/ora_ds/testins/testins.dbf' size 4096m;
 
+SQL> create bigfile tablespace testins datafile '/ora_ds/testins/testins.dbf' size 409600m;
+
 SQL> create temporary tablespace tmp_testins tempfile '/ora_ds/testins/tmp_testins.dbf' size 2048M autoextend on next 100M maxsize 4096M;
 
 # 使用前文建立的表空间，建立新用户。
