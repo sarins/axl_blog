@@ -1,8 +1,8 @@
 prose:
   media: 'images'
   rooturl: '_posts'
-  siteurl: 'http://roadstarteam.com'
-  relativeLinks: 'http://roadstarteam.com/links.jsonp'
+  siteurl: 'http://blog.rock-solid.cn'
+  relativeLinks: 'http://blog.rock-solid.cn/links.jsonp'
   metadata:
     _posts/blog:
       - name: "category"
